@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
-import { Feather,Entypo, Ionicons } from '@expo/vector-icons';
+import { Feather,Entypo } from '@expo/vector-icons';
 import { auth } from '../firebase/firebase.config';
 
 
@@ -20,8 +20,9 @@ const signUpUser = ()=>{
     createUserWithEmailAndPassword(auth, email, password)
     .then((res) => {
       console.log(res)
+      alert('account created')
       navigation.navigate('LoginScreen')
-      const user = userCredential.user;
+      const user = res.user;
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -31,7 +32,6 @@ const signUpUser = ()=>{
 }
 
 const updateSecureTextEntry = ( ) =>{
-  
   setData({
     ...data,
    secureTextEntry:!data.secureTextEntry,
@@ -47,19 +47,6 @@ return (
     <Animatable.View
     animation="fadeInUpBig" 
     style={styles.footer}>
-    <Text style={styles.title}>Name </Text>
-      <View style={styles.email}>
-      <Ionicons name="person-circle" size={24} color="gray" style={styles.icon}/>
-      <View style={styles.action}>
-      <TextInput
-      value={name}
-      placeholder='enter name'
-      style={styles.textInput}
-      autoCapitalize="none"
-      onChangeText={(text)=>setName(text)}/>
-      </View>
-      </View>
-
       <Text style={styles.title}>Email </Text>
       <View style={styles.email}>
       <MaterialCommunityIcons name="email-outline" size={22} color="gray" style={styles.icon}/>
@@ -114,7 +101,7 @@ container:{
   backgroundColor:"#5175ae"
 },
 header:{
-  flex:1.5,
+  flex:2,
   justifyContent:"center",
   alignItems:"center"
 },

@@ -15,13 +15,14 @@ const LoginScreen = ({navigation}) => {
     });
     const loginUser =() =>{
       signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => { 
-          console.log('login ')
+        .then((res) => { 
+          alert('login successful')
           navigation.navigate('HomeScreen')
-          const user = userCredential.user;
+          const user = res.user;
         })
         .catch((error) => {
           const errorCode = error.code;
+          alert('invalid credentials')
           const errorMessage = error.message;
         });
 
